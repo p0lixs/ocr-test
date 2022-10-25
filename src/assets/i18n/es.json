@@ -1,0 +1,6 @@
+{
+  "saludo": "Hola, bienvenid@ al OCR-TEST",
+  "resultado": "Resultado",
+  "seleccion_archivo": "Seleccionar archivo",
+  "explicacion_ocr": "Esta es una app para testear el ocr tesseract.js. Para testear seleccione un archivo que contenga texto y pulse sobre iniciar reconocimiento"
+}

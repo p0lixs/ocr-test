@@ -1,0 +1,28 @@
+<div class="view">
+   <mat-card [formGroup]="form">
+      <mat-card-title>{{"saludo" |translate}}</mat-card-title>
+      <mat-card-header>{{"explicacion_ocr"|translate}}</mat-card-header>
+      <mat-card-content>
+         <div class="formulario">
+            <div>
+               <button type="button" mat-button [disabled]="loading"
+                  (click)="fileInput.click()">{{"seleccion_archivo"|translate}}</button>
+               <input hidden formControlName="img" (change)="upLoadFile($event)" #fileInput type="file" id="file">
+               <span *ngIf="file">{{file.name}}</span>
+            </div>
+            <mat-progress-bar class="example-margin" [value]="progressValue">
+            </mat-progress-bar>
+         </div>
+      </mat-card-content>
+      <mat-card-actions>
+         <button mat-flat-button color="primary" [disabled]="form.invalid" (click)="onRecognise()">Iniciar
+            reconocimiento</button>
+      </mat-card-actions>
+   </mat-card>
+   <mat-card *ngIf="result">
+      <mat-card-title>{{"resultado"|translate}}</mat-card-title>
+      <mat-card-content>
+         <div class="result" [innerHTML]="result"></div>
+      </mat-card-content>
+   </mat-card>
+</div>
