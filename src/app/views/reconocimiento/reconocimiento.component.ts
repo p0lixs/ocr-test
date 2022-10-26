@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { from } from 'rxjs';
 import * as tesseract from 'tesseract.js';
 
 @Component({
@@ -17,6 +18,7 @@ export class ReconocimientoComponent implements OnInit {
     img: new FormControl(null, Validators.required),
   });
   public file: File;
+  public imgSrc: string | undefined;
   public progressValue = 0;
   public loading = false;
   public result: string | null = null;
@@ -27,6 +29,9 @@ export class ReconocimientoComponent implements OnInit {
 
   upLoadFile(event: any) {
     this.file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => (this.imgSrc = reader.result?.toString());
+    reader.readAsDataURL(this.file);
   }
 
   onRecognise() {
@@ -36,20 +41,24 @@ export class ReconocimientoComponent implements OnInit {
   }
   startRecognition(file: any) {
     this.loading = true;
-    tesseract
-      .recognize(file, 'spa', {
+    from(
+      tesseract.recognize(file, 'spa', {
         logger: (m) => {
-          console.log(m);
           if (m.status == 'recognizing text') {
             this.progressValue = m.progress * 100;
           }
         },
       })
-      .then((res) => {
+    ).subscribe(
+      (res) => {
         console.log(res);
         this.result = res.data.hocr;
         this.loading = false;
-      });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   get imgValue() {
     return this.form.get('img')?.value;

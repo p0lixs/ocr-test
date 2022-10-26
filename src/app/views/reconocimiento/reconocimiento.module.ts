@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [ReconocimientoComponent],
   imports: [
-    SharedModule,
     ReconocimientoRoutingModule,
+    SharedModule,
     MatProgressBarModule,
     MatCardModule,
     MatButtonModule,

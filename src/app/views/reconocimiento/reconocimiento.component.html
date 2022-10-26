@@ -10,13 +10,14 @@
                <input hidden formControlName="img" (change)="upLoadFile($event)" #fileInput type="file" id="file">
                <span *ngIf="file">{{file.name}}</span>
             </div>
+            <img *ngIf="file" is="img-preview" [src]="imgSrc" alt="preview de la imagen a procesar" />
             <mat-progress-bar class="example-margin" [value]="progressValue">
             </mat-progress-bar>
          </div>
       </mat-card-content>
       <mat-card-actions>
-         <button mat-flat-button color="primary" [disabled]="form.invalid" (click)="onRecognise()">Iniciar
-            reconocimiento</button>
+         <button mat-flat-button color="primary" [disabled]="form.invalid || loading"
+            (click)="onRecognise()">{{"iniciar_reconocimiento"|translate}}</button>
       </mat-card-actions>
    </mat-card>
    <mat-card *ngIf="result">

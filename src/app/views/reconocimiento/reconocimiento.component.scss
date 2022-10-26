@@ -1,8 +1,8 @@
 .view {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  width: 80%;
 
   .formulario {
     display: flex;
@@ -12,9 +12,10 @@
   ::ng-deep span.ocrx_word {
     border: 1px solid red;
     margin: 0.2em;
+    padding: 0 0.3em;
   }
   mat-card {
     margin-top: 1em;
-    width: 50%;
+    width: 40%;
   }
 }
